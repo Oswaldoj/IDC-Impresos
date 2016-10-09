@@ -6,3 +6,4 @@ markdown==2.6.7
 django-filter==0.15.2
 django-crispy-forms
 django-guardian
+Pillow==3.4.0
