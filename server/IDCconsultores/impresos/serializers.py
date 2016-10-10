@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from models import Product, ProductCategory, Area, Service, SupportService
+from IDCconsultores.impresos.models import Product, ProductCategory, Area, Service, SupportService
 
 class ProductSerializer(serializers.HyperlinkedModelSerializer):
 	class Meta:
