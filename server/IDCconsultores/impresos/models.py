@@ -32,3 +32,4 @@ class Service(models.Model):
 class SupportService(models.Model):
 	service = models.ForeignKey(Service,related_name="super_services")
 	subservice = models.ForeignKey(Service,related_name="supported_services")
+	unique_together = ('service', 'subservice')
