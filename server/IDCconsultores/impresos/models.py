@@ -3,25 +3,25 @@ from django.db import models
 
 class Product(models.Model):
 	name = models.CharField(max_length=50)
-	description = models.CharField(max_length=200)
-	pdf = models.FileField(upload_to='pdf/')
-	image = models.ImageField(upload_to='img/')
+	description = models.CharField(max_length=200,null=True)
+	pdf = models.FileField(upload_to='pdf/',null=True)
+	image = models.ImageField(upload_to='img/',null=True)
 
 class ProductCategory(models.Model):
 	name = models.CharField(max_length=50)
-	description = models.CharField(max_length=200)
-	image = models.ImageField(upload_to='img/')
+	description = models.CharField(max_length=200,null=True)
+	image = models.ImageField(upload_to='img/',null=True)
 
 class Area(models.Model):
 	name = models.CharField(max_length=50)
-	description = models.CharField(max_length=200)
-	image = models.ImageField(upload_to='img/')
+	description = models.CharField(max_length=200,null=True)
+	image = models.ImageField(upload_to='img/',null=True)
 
 class Service(models.Model):
 	name = models.CharField(max_length=50)
-	description = models.CharField(max_length=200)
-	pdf = models.FileField(upload_to='pdf/')
-	image = models.ImageField(upload_to='img/')
+	description = models.CharField(max_length=200,null=True)
+	pdf = models.FileField(upload_to='pdf/',null=True)
+	image = models.ImageField(upload_to='img/',null=True)
 	subservices = models.ManyToManyField(
 		'self',
 		symmetrical=False,
