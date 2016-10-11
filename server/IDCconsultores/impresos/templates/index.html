@@ -1,0 +1,16 @@
+{% load staticfiles %}
+
+<html>
+<body ng-app="TestApp">
+<div ng-controller="AppController as ctrl">
+	<h2>Areas</h2>
+	    <div ng-repeat="area in ctrl.areas">
+	            <h3>
+	            	<span ng-bind="area.name"></span>,<span ng-bind="area.description"></span>
+	            </h3>
+	    </div>
+</div>
+<script src="{% static 'angular/angular.min.js' %}"></script>
+<script src="{% static 'js/app.js' %}"></script>
+</body>
+</html>
