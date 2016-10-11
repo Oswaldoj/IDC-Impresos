@@ -1,36 +1,30 @@
 (function(){
 'use strict';
 
-angular.module('TestApp',[])
+angular.module('TestApp',['ngResource'])
 .controller('AppController',AppController)
-.service('APIRetrieverService',APIRetrieverService);
+.factory('Area',AreaResourceFactory);
 
-AppController.$inject = ['APIRetrieverService'];
-function AppController(APIRetrieverService){
-	var ctrl = this;
-	ctrl.areas = [];
-	var promise = APIRetrieverService.getAreas();
-	promise.then(function(response) {
-		ctrl.areas = response;
-	})
-	.catch(function(error){
-		console.log(error);
+AreaResourceFactory.$inject = ['$resource'];
+function AreaResourceFactory($resource){
+    return $resource('/areas/:id', {id: '@id'},
+    {
+	    query: {
+	      method: 'GET',
+	      isArray: true,
+	      transformResponse: function(data) {
+	      	//django data is under results field
+	        return angular.fromJson(data).results; 
+	      }
+	    }
 	});
 }
 
-APIRetrieverService.$inject = ['$http'];
-function APIRetrieverService($http){
-  var service = this;
-
-  service.getAreas = function(){
-	 var response = $http({
-	 	method: "GET",
-	 	url: 'services'
-	 }).then(function(response) {
-		return response.data.results;
-	 });
-	 return response;
-  }
+AppController.$inject = ['Area'];
+function AppController(Area){
+	var ctrl = this;
+	ctrl.areas = [];
+	ctrl.areas = Area.query();
 }
 
 })();
