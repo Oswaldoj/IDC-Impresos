@@ -1,21 +1,24 @@
 from __future__ import unicode_literals
 from django.db import models
 
-class Product(models.Model):
+
+class Area(models.Model):
 	name = models.CharField(max_length=50,unique=True)
 	description = models.CharField(max_length=200,null=True)
-	pdf = models.FileField(upload_to='pdf/',null=True)
 	image = models.ImageField(upload_to='img/',null=True)
 
 class ProductCategory(models.Model):
 	name = models.CharField(max_length=50,unique=True)
 	description = models.CharField(max_length=200,null=True)
 	image = models.ImageField(upload_to='img/',null=True)
+	area = models.ForeignKey(Area, related_name='product_categories',null=True)
 
-class Area(models.Model):
+class Product(models.Model):
 	name = models.CharField(max_length=50,unique=True)
 	description = models.CharField(max_length=200,null=True)
+	pdf = models.FileField(upload_to='pdf/',null=True)
 	image = models.ImageField(upload_to='img/',null=True)
+	product_category = models.ForeignKey(ProductCategory, related_name='products',null=True)
 
 class Service(models.Model):
 	name = models.CharField(max_length=50,unique=True)

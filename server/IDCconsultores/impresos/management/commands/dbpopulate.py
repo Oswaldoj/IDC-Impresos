@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from django.core.management.base import BaseCommand
-from IDCconsultores.impresos.models import Service, SupportService, Area, ProductCategory
+from IDCconsultores.impresos.models import Product, ProductCategory, Area, Service, SupportService
+import json
+import os
 
 class Command(BaseCommand):
 	args = 'No args'
@@ -28,87 +30,45 @@ class Command(BaseCommand):
 		self.report_creation('Product Category',product_category.name,created)
 		return (product_category,created)
 
-	def add_services(self):
-		print "Adding services ..."
-		services= [ 
-			{ 'name':'Asesoría',
-			  'subservices': [
-				{ 'name': 'Imposición y Montaje', 'subservices':[]},
-				{ 'name':'Desarrollo de empaques', 'subservices':[]},
-				{ 'name':'Gestión de color para impresos', 'subservices':[]},
-				{ 'name':'Desarrollo de troqueles', 'subservices':[]},
-				{ 'name':'Supervisión de procesos de impresión', 'subservices':[]},
-			]},
-			{ 'name':'Impresión Digital (Índigo/Xerox)', 'subservices':[]},
-			{ 'name':'Impresión Offset (Litografía)', 'subservices':[]},
-			{ 'name':'Impresión Gran Formato','subservices':[]}
-		]
-
+	def add_services(self,services):
 		for service in services:
 			self.add_service(service)
 
-	def add_areas(self):
-		print "Adding areas ..."
-		areas = [
-			{ 'name':'Publicidad y Mercadeo'},
-			{ 'name':'Editorial'},
-			{ 'name':'Eventos'},
-			{ 'name':'Empresarial'}
-		]
+	def add_areas(self,areas,product_categories):
+		#each area has a set of product categories
+		assert len(areas) == len(product_categories)
+		for area,product_category_set in zip(areas,product_categories):
+			area_instance , _ =self.add_area(area)
 
-		for area in areas:
-			self.add_area(area)
+			for product_category in product_category_set:
+				product_category_instance, _ = self.add_product_category(product_category)
+				product_category_instance.area = area_instance
+				product_category_instance.save()
 
-	def add_product_categories(self):
-		print "Adding Product Categories ..."
-		product_categories = [
-			{ 'name':'Folletos'},
-			{ 'name':'Catálogos'},
-			{ 'name':'Afiches'},
-			{ 'name':'Volantes'},
-			{ 'name':'Calendarios'},
-			{ 'name':'Dipticos'},
-			{ 'name':'Tripticos'},
-			{ 'name':'Encuestas'},
-			{ 'name':'Despligables'},
-			{ 'name':'Habladores'},
-			{ 'name':'Colgantes'},
-			{ 'name':'Cupones'},
-			{ 'name':'Chapas'},
-			{ 'name':'Mouse Pad'},
-			{ 'name':'Marca libros'},
-			{ 'name':'Posavasos'},
-			{ 'name':'Desprendibles'},
-			{ 'name':'Pendones'},
-			{ 'name':'Backing'},
-			{ 'name':'Libros'},
-			{ 'name':'Cuadernos'},
-			{ 'name':'Libretas'},
-			{ 'name':'Agendas'},
-			{ 'name':'Revistas'},
-			{ 'name':'Invitaciones'},
-			{ 'name':'Notas de prensa'},
-			{ 'name':'Programas de mano'},
-			{ 'name':'Diplomas'},
-			{ 'name':'Certificados'},
-			{ 'name':'Identificadores'},
-			{ 'name':'Pendones'},
-			{ 'name':'Backing'},
-			{ 'name':'Tarjetas de presentación'},
-			{ 'name':'Talonarios:Facturas, Nota de entrega, Notas debito, Notas Crédito, Papelería en general'},
-			{ 'name':'Carpetas'},
-			{ 'name':'Sobres'},
-			{ 'name':'Etiquetas'},
-			{ 'name':'Menúes'},
-			{ 'name':'Door Hangers'},
-			{ 'name':'Recipes'},
-			{ 'name':'Historias médicas'},
-			{ 'name':'Control de citas'}
-		]
-		for product_category in product_categories:
-			self.add_product_category(product_category)
+	def deserialize(self,jsonfilepath):
+		with open(jsonfilepath) as json_data:
+			return json.load(json_data)
 
 	def handle(self, *args, **options):
-		self.add_services()
-		self.add_areas()
-		self.add_product_categories()
+		services = []
+		areas = []
+		product_categories = []
+
+		services_jsonfile = 'json/services.json'
+		areas_jsonfile = 'json/areas.json'
+		product_categories_jsonfile = 'json/product_categories.json'
+
+		commandpath, _ = os.path.split(os.path.abspath(__file__))
+
+		""" Loading json data from resources """
+		services_jsonfile = os.path.join(commandpath,services_jsonfile)
+		services = self.deserialize(services_jsonfile)
+
+		areas_jsonfile = os.path.join(commandpath,areas_jsonfile)
+		areas = self.deserialize(areas_jsonfile)
+
+		product_categories_jsonfile = os.path.join(commandpath,product_categories_jsonfile)
+		product_categories = self.deserialize(product_categories_jsonfile)
+
+		self.add_services(services=services)
+		self.add_areas(areas=areas,product_categories=product_categories)

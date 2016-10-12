@@ -1,0 +1,13 @@
+[ 
+	{ "name":"Asesoría",
+	  "subservices": [
+		{ "name": "Imposición y Montaje", "subservices":[]},
+		{ "name":"Desarrollo de empaques", "subservices":[]},
+		{ "name":"Gestión de color para impresos", "subservices":[]},
+		{ "name":"Desarrollo de troqueles", "subservices":[]},
+		{ "name":"Supervisión de procesos de impresión", "subservices":[]}
+	]},
+	{ "name":"Impresión Digital (Índigo/Xerox)", "subservices":[]},
+	{ "name":"Impresión Offset (Litografía)", "subservices":[]},
+	{ "name":"Impresión Gran Formato","subservices":[]}
+]
