@@ -7,11 +7,13 @@ class ProductSerializer(serializers.HyperlinkedModelSerializer):
 		fields = '__all__'
 
 class ProductCategorySerializer(serializers.HyperlinkedModelSerializer):
+	products = ProductSerializer(many=True)
 	class Meta:
 		model = ProductCategory
 		fields = '__all__'
 
 class AreaSerializer(serializers.HyperlinkedModelSerializer):
+	product_categories = ProductCategorySerializer(many=True)
 	class Meta:
 		model =  Area
 		fields = '__all__'
