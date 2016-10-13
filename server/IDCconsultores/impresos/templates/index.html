@@ -3,14 +3,19 @@
 <html>
 <body ng-app="TestApp">
 <div ng-controller="AppController as ctrl">
-	<h2>Areas</h2>
+	<h2>Productos:</h2>
+	<h3>Areas</h3>
 	    <div ng-repeat="area in ctrl.areas">
-            <h3><span ng-bind="area.name"></span>,<span ng-bind="area.description"></span></h3>
+            <span ng-bind="area.name"></span>,<span ng-bind="area.description"></span>
             <div ng-repeat="product_category in area.product_categories">
             	<span ng-bind="product_category.name"></span>,
             	<span ng-bind="product_category.description"></span>
             </div>
 	    </div>
+	<h2>Servicios:</h2>
+	<div ng-repeat="service in ctrl.services">
+		<span ng-bind="service.name"></span>,<span ng-bind="service.description"></span>
+	</div>
 </div>
 <script src="{% static 'angular/angular.min.js' %}"></script>
 <script src="{% static 'angular/angular-resource.min.js' %}"></script>
