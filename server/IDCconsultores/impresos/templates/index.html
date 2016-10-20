@@ -1,24 +1,29 @@
 {% load staticfiles %}
 
 <html>
-<body ng-app="TestApp">
-<div ng-controller="AppController as ctrl">
-	<h2>Productos:</h2>
-	<h3>Areas</h3>
-	    <div ng-repeat="area in ctrl.areas">
-            <span ng-bind="area.name"></span>,<span ng-bind="area.description"></span>
-            <ul ng-repeat="product_category in area.product_categories">
-            	<li><span ng-bind="product_category.name"></span>,
-            	<span ng-bind="product_category.description"></span></li>
-            </ul>
-	    </div>
-	<h2>Servicios:</h2>
-	<ul ng-repeat="service in ctrl.services">
-		<li><span ng-bind="service.name"></span>,<span ng-bind="service.description"></span></li>
-	</ul>
-</div>
-<script src="{% static 'angular/angular.min.js' %}"></script>
-<script src="{% static 'angular/angular-resource.min.js' %}"></script>
-<script src="{% static 'js/app.js' %}"></script>
+<body ng-app="ImpresosApp">
+
+	<ui-view></ui-view>
+
+	<!-- Libraries -->
+	<script src="{% static 'lib/angular.min.js' %}"></script>
+	<script src="{% static 'lib/angular-resource.min.js' %}"></script>
+	<script src="{% static 'lib/angular-ui-router.min.js' %}"></script>
+
+
+	 <!-- Modules -->
+	<script src="{% static 'js/src/impresosapp/impresosapp.module.js' %}"></script>
+
+	<!-- Routes -->
+  	<script src="{% static 'js/src/routes.js' %}"></script>
+
+  	<!-- App Artifacts -->
+  	<script src="{% static 'js/src/impresosapp/impresosapp.controller.js' %}"></script>
+  	<script src="{% static 'js/src/impresosapp/impresosapp.resources.js' %}"></script>
+   	<script src="{% static 'js/src/impresosapp/services.component.js' %}"></script>
+   	<script src="{% static 'js/src/impresosapp/services.controller.js' %}"></script>
+    <script src="{% static 'js/src/impresosapp/products.controller.js' %}"></script>
+    <script src="{% static 'js/src/impresosapp/products.component.js' %}"></script>
+
 </body>
 </html>

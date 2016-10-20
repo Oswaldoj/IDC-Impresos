@@ -1,0 +1,8 @@
+<div ng-repeat="area in $ctrl.areas">
+   <h3><span ng-bind="area.name"></span></h3>
+   <p><span ng-bind="area.description"></span></p>
+    <ul ng-repeat="product_category in area.product_categories">
+    	<li><span ng-bind="product_category.name"></span>,
+    	<span ng-bind="product_category.description"></span></li>
+    </ul>
+</div>

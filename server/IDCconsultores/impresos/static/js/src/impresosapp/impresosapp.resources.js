@@ -1,10 +1,9 @@
 (function(){
 'use strict';
 
-angular.module('TestApp',['ngResource'])
-.controller('AppController',AppController)
-.factory('Area',AreaResourceFactory)
-.factory('Service',ServiceResourceFactory);
+angular.module('ImpresosApp')
+.factory('AreaResourceFactory',AreaResourceFactory)
+.factory('ServiceResourceFactory',ServiceResourceFactory)
 
 AreaResourceFactory.$inject = ['$resource'];
 function AreaResourceFactory($resource){
@@ -34,15 +33,6 @@ function ServiceResourceFactory($resource){
 	      }
 	    }
 	});
-}
-
-AppController.$inject = ['Area','Service'];
-function AppController(Area,Service){
-	var ctrl = this;
-	ctrl.areas = [];
-	ctrl.services = [];
-	ctrl.areas = Area.query();
-	ctrl.services = Service.query();
 }
 
 })();
