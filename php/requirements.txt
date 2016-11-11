@@ -1,0 +1,21 @@
+sudo apt -get install apache2
+
+
+descargar release 5.4.0 pag oiicial php
+http://php.net/releases/
+
+tar -xvf php-5.4.0
+cd 5.4.0 
+
+seguir este tutorial para configuracion 
+./configure --with-apxs2=/usr/bin/apxs --with-pgsql
+http://www.thegeekstuff.com/2008/07/instruction-guide-to-install-php5-from-source-on-linux/
+http://php.net/manual/es/install.unix.apache2.php
+
+luego de configurar hay que patchear la version de php old release con el command:
+
+curl -s https://mail.gnome.org/archives/xml/2012-August/txtbgxGXAvz4N.txt | patch -p0
+
+rfuente: https://github.com/phpbrew/phpbrew/issues/249
+
+luego correr make;make test;make install;
