@@ -7,6 +7,11 @@
     $result = pg_exec($db_connection, 'select * from "impresos_area"');
     $numrows = pg_numrows($result);
 
+    $url = 'http://areas/10';
+    $url_args = parse_url($url);
+    echo var_dump($url_args);
+    echo var_dump($_GET);
+
     /* TODO : Use posgresql PDO to prevent sql injection
        TODO : add .ini file containing the sensitive db parameters*/
     function getConnection() {
@@ -20,9 +25,9 @@
   ?>
  <head>  
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8"/>
     <!-- Bootstrap css -->
-    <link rel="stylesheet" href="static/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="static/lib/bootstrap/css/bootstrap.min.css">
   <title>PHP StartProject</title>
  </head>
  <body>
@@ -40,7 +45,7 @@
         $row = pg_fetch_array($result, $ri);
         echo " <td>", $row["id"], "</td>
         <td>", $row["name"], "</td>","<td>",
-        ($row["description"])?$row["description"]:"Sin descripcion disponible",
+        (($row["description"])?$row["description"]:"Sin descripcion disponible"),
         "</td></tr>";
      }
      pg_close($db_connection);
@@ -53,6 +58,6 @@
       </footer>
       <!-- JQuery & Bootstrap js -->
       <script type="text/javascript" src="static/lib/jquery/jquery-3.1.1.min.js"></script>
-      <script type="text/javascript" src="static/lib/bootstrap/bootstrap.min.js"></script>
+      <script type="text/javascript" src="static/lib/bootstrap/js/bootstrap.min.js"></script>
  </body>
 </html>

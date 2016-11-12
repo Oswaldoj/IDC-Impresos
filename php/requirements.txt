@@ -19,3 +19,29 @@ curl -s https://mail.gnome.org/archives/xml/2012-August/txtbgxGXAvz4N.txt | patc
 rfuente: https://github.com/phpbrew/phpbrew/issues/249
 
 luego correr make;make test;make install;
+
+
+
+---------------------------------------------
+CONFIG GUIDELINES
+* enable mod rewrite
+sudo a2enmod rewrite
+sudo service apache2 restart
+
+* AllowOverride : to enable .htaccess goto /etc/apache2/sites-available/000-d
+efault.conf
+change
+<Directory /var/www/> --or custom DocumentRoot
+        Require all granted
+</Directory>
+
+To
+
+<Directory /var/www/> 
+        AllowOverride All
+        Require all granted
+</Directory>
+
+restart the sv
+
+
