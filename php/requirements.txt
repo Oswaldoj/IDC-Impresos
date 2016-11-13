@@ -7,8 +7,8 @@ http://php.net/releases/
 tar -xvf php-5.4.0
 cd 5.4.0 
 
-seguir este tutorial para configuracion 
-./configure --with-apxs2=/usr/bin/apxs --with-pgsql
+seguir este tutorial para configuracion IMPORTANTE AGREGAR EL WITH PDO
+./configure --with-apxs2=/usr/bin/apxs --with-pgsql --with-pdo-pgsql
 http://www.thegeekstuff.com/2008/07/instruction-guide-to-install-php5-from-source-on-linux/
 http://php.net/manual/es/install.unix.apache2.php
 
@@ -43,5 +43,3 @@ To
 </Directory>
 
 restart the sv
-
-

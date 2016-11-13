@@ -1,14 +1,20 @@
 <?php
-
 require_once 'API.class.php';
 require_once 'models.php';
+require_once 'services.php';
 
 class MyAPI extends API {
     protected $User;
+    protected $model_service;
 
-    public function __construct($request, $origin) {
+    public function __construct($request, $origin,$model_service = null) {
         parent::__construct($request);
+        if (is_null($model_service)) {
+            $model_service = new Services\ModelService();
+        }
+        $this->model_service = $model_service;
 
+        /* TODO Authentication and api key validation*/
         // Abstracted out for example
         $APIKey = new Models\APIKey();
         $User = new Models\User();
@@ -27,14 +33,15 @@ class MyAPI extends API {
     }
 
     /**
-     * Example of an Endpoint
+     * areas Endpoint
      */
-     protected function example() {
-        if ($this->method == 'GET') {
-            return "Your name is " . $this->User->getName();
+     protected function areas() {
+        if ($this->method == 'GET') {  
+            return $this->model_service->getAllAreas();
         } else {
             return "Only accepts GET requests";
         }
      }
  }
  ?>
+ 
