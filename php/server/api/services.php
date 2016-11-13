@@ -1,14 +1,14 @@
 <?php namespace Services;
-	require_once 'models.php';
-	use Models;
+	require_once 'models/AreaFactory.class.php';
+	use \Models\Factories as Factories;
 
-	class ModelService {
+	class ImpresosService {
 
 		private $area_repository_container;
 
 		public function __construct($area_factory = null){
 			if (is_null($area_factory)) {
-				$area_factory = new Models\AreaFactory();
+				$area_factory = new Factories\AreaFactory();
 			}
 			$this->area_repository_container = $area_factory->getAreaRepositoryContainer();
 		}

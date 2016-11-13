@@ -86,15 +86,14 @@
         }
 
         protected function cleanInputs($data) {
-            $clean_input = Array();
-            if (is_array($data)) {
-                foreach ($data as $key => $value) {
-                    $clean_input[$key] = $this->cleanInputs($value);
-                }
-            } else {
-                $clean_input = trim(strip_tags($data));
-            }
-            return $clean_input;
+          if (!is_array($data)) {
+            return trim(strip_tags($data));
+          }
+          $clean_input = Array();
+          foreach ($data as $key => $value) {
+            $clean_input[$key] = $this->cleanInputs($value);
+          }
+          return $clean_input;
         }
 
         protected function getStatusMessage($code) {
