@@ -31,6 +31,7 @@
                 request = $.ajax({
                     url: "/api/areas",
                     type: "get",
+                    //dataType: 'html', //testing purposes
                 });
                 request.done(function (response, textStatus, jqXHR){
                     console.log(response);

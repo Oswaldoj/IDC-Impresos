@@ -1,10 +1,9 @@
 <?php namespace Models\Repositories;
 	require_once __DIR__.'/../db/Database.class.php';
-	require_once __DIR__.'/IAreaRepository.interface.php';
 	use \Database;
 	use \Models\Repositories as Repositories;
 
-	abstract class SQLRepository implements Repositories\IAreaRepository{
+	abstract class SQLRepository {
 		protected $dbhandler;
 		protected $tablename;
 
