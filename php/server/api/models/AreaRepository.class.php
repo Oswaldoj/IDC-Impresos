@@ -15,6 +15,12 @@
 			parent::__construct($dbh,'impresos_area');
 		}
 
+		public static function arrayToArea(Array $array){
+			$area = new Beans\Area();
+			$area->loadProperties($array);
+			return $area;
+		}
+
 		/* Checks if the given objet is of type area*/
 		private function isAreaType($obj){
 			return ($obj instanceof Beans\Area);
@@ -31,14 +37,14 @@
 			return (new Beans\Area())->loadProperties($row);
 		}
 
+		public function arrayToAreas(Array $array){
+			// casts all rows to Area
+			return array_map(array($this,"arrayToArea"),$array);
+		}
+
 		public function getAllAreas(){
 			$rows = parent::getAll();
-			$createArea = function($row) { 
-							return ((new Beans\Area())->loadProperties($row)); 
-					   	  };
-			// casts all rows to Area
-			array_map($createArea,$rows);
-			return $rows;
+			return $this->arrayToAreas($rows);
 		}
 
 		public function save(Beans\ImpresosObject $area) { 

@@ -1,6 +1,6 @@
 <?php namespace Models\Beans;
-	require 'ImpresosObject.class.php';
-	require 'Area.class.php';
+	require_once 'ImpresosObject.class.php';
+	require_once 'Area.class.php';
 
 	use \Models\Beans as Beans;
 	
@@ -28,6 +28,16 @@
 		public function setArea(Bean\Area $area) {
 			$this->area = $area;
 		}
+
+		public function asArray() {
+			$product_category_array = parent::asArray();
+        	$product_category_array['area_id'] = $this->area->getId();
+        	return $product_category_array;
+    	}
+
+		public function jsonSerialize() {
+        	return $this->asArray();
+    	}
 	}
 
 

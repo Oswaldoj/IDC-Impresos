@@ -57,5 +57,14 @@
 		public function setImage($image) {
 			$this->img = $image;
 		}
+
+		public function asArray() {
+			return [
+				'id' => $this->id,
+				'name' => $this->name,
+				'description' => $this->description,
+				'img' => $this->img
+			];
+		}
    }
 ?>

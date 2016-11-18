@@ -24,7 +24,6 @@
 
 		public function getAll() { 
 			$this->dbhandler->query('SELECT * FROM ' . $this->tablename);
-			//$this->dbhandler->bind(':tablename',$this->tablename);
 			$rows = $this->dbhandler->getResultSet();
 			return $rows;
 		}
