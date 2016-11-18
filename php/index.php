@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <?php
-    require_once 'api/MyAPI.class.php';
+    require_once 'server/api/MyAPI.class.php';
     ini_set ("display_errors", "1");
     error_reporting(E_ALL);
   ?>
@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8"/>
     <!-- Bootstrap css -->
-    <link rel="stylesheet" type="text/css" href="static/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="server/assets/lib/bootstrap/css/bootstrap.min.css">
   <title>Impresos articulos</title>
  </head>
  <body>
@@ -24,8 +24,8 @@
         <span>© Copyright</span> 
       </footer>
       <!-- JQuery & Bootstrap js -->
-      <script type="text/javascript" src="static/lib/jquery/jquery-3.1.1.min.js"></script>
-      <script type="text/javascript" src="static/lib/bootstrap/js/bootstrap.min.js"></script>
+      <script type="text/javascript" src="server/assets/lib/jquery/jquery-3.1.1.min.js"></script>
+      <script type="text/javascript" src="server/assets/lib/bootstrap/js/bootstrap.min.js"></script>
       <script>
             $(function() {
                 request = $.ajax({
